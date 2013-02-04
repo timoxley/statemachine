@@ -1,15 +1,11 @@
 
-# statemachine-talk
+# statemachine
 
-  talk about statemachines
+  Work in progress. See the tests.
 
 ## Installation
 
-    $ component install timoxley/statemachine-talk
-
-## API
-
-   
+    $ component install timoxley/statemachine
 
 ## License
 
