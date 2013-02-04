@@ -1,0 +1,25 @@
+{
+  "name": "statemachine",
+  "repo": "timoxley/statemachine-talk",
+  "description": "talk about statemachines",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "component/emitter": "*",
+    "visionmedia/debug": "*",
+    "visionmedia/page.js": "*",
+    "component/delegate": "*",
+    "component/reactive": "*",
+    "timoxley/assert": "*",
+    "philbooth/spooks.js": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js",
+    "template.js"
+  ],
+  "styles": [
+    "statemachine-talk.css"
+  ]
+}
