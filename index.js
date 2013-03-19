@@ -1,6 +1,5 @@
 'use strict'
 var Emitter = require('emitter')
-var page = require('page')
 var delegate = require('delegate')
 var debug = require('debug')
 var log = debug('state')

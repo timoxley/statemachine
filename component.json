@@ -7,11 +7,9 @@
   "dependencies": {
     "component/emitter": "*",
     "visionmedia/debug": "*",
-    "visionmedia/page.js": "*",
     "component/delegate": "*",
     "component/reactive": "*",
-    "timoxley/assert": "*",
-    "philbooth/spooks.js": "*"
+    "timoxley/assert": "*"
   },
   "development": {},
   "license": "MIT",
