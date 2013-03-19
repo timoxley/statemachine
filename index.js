@@ -23,7 +23,7 @@ function State(name) {
     state.emit.apply(state, ['entering'].concat(args))
   })
   this.on('leaving', function() {
-    self.state && self.leave()
+    self.state && self._leave()
     self.state = undefined
   })
 }
@@ -52,9 +52,9 @@ Workflow.prototype.goToState = function goToState(state) {
   if (!foundState) return log('Trying to go to no state?', state)
   var args = [].slice.call(arguments, 1)
   this.add(foundState)
-  this.leave()
+  this._leave()
   this.state = foundState
-  this.enter(this.state, args)
+  this._enter(this.state, args)
 }
 
 Workflow.prototype.findState = function findState(stateName) {
@@ -74,12 +74,12 @@ Workflow.prototype.add = function(state) {
   this.emit('add', state)
 }
 
-Workflow.prototype.leave = function() {
+Workflow.prototype._leave = function() {
   if (!this.state) return
   this.emit('leave', this.state)
 }
 
-Workflow.prototype.enter = function(state, args) {
+Workflow.prototype._enter = function(state, args) {
   this.emit.apply(this, ['enter', state].concat(args))
 }
 
