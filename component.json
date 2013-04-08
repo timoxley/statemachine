@@ -1,17 +1,18 @@
 {
   "name": "statemachine",
-  "repo": "timoxley/statemachine-talk",
-  "description": "talk about statemachines",
+  "repo": "timoxley/statemachine",
+  "description": "a state machine",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
     "component/emitter": "*",
-    "visionmedia/debug": "*",
-    "component/delegate": "*",
-    "component/reactive": "*",
-    "timoxley/assert": "*"
+    "visionmedia/debug": "*"
   },
-  "development": {},
+  "development": {
+    "timoxley/assert": "*",
+    "component/reactive": "*",
+    "component/delegate": "*"
+  },
   "license": "MIT",
   "scripts": [
     "index.js",

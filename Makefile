@@ -1,6 +1,6 @@
 
 build: components index.js statemachine-talk.css template.js
-	@component build
+	@component build --dev
 
 template.js: template.html
 	@component convert $<

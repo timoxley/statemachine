@@ -1,14 +1,12 @@
 'use strict'
 var Emitter = require('emitter')
-var delegate = require('delegate')
 var debug = require('debug')
 var log = debug('state')
-
-var reactive = require('reactive')
 
 debug.enable('state')
 
 function State(name) {
+  if (!(this instanceof State)) return new State(name)
   this.name = name
   var self = this
   this.on('leave', function(state) {
@@ -27,12 +25,10 @@ function State(name) {
     self.state = undefined
   })
 }
+
 Emitter(State.prototype)
 
-Workflow = State
-
-Emitter(Workflow.prototype)
-Workflow.prototype.trigger = function(action) {
+State.prototype.trigger = function(action) {
   var args = [].slice.call(arguments, 1)
   if (this.state[action] && typeof this.state[action] === 'function') {
     log('triggering action "%s" in state "%s"', action, this.state.name)
@@ -46,7 +42,7 @@ Workflow.prototype.trigger = function(action) {
   }
 }
 
-Workflow.prototype.goToState = function goToState(state) {
+State.prototype.goToState = function goToState(state) {
   var foundState = state
   if (typeof state === 'string') foundState = this.findState(state)
   if (!foundState) return log('Trying to go to no state?', state)
@@ -57,7 +53,7 @@ Workflow.prototype.goToState = function goToState(state) {
   this._enter(this.state, args)
 }
 
-Workflow.prototype.findState = function findState(stateName) {
+State.prototype.findState = function findState(stateName) {
   var state = this.states.filter(function(state) {
     return state.name === stateName
   })
@@ -65,7 +61,7 @@ Workflow.prototype.findState = function findState(stateName) {
   return state.pop()
 }
 
-Workflow.prototype.add = function(state) {
+State.prototype.add = function(state) {
   this.states = this.states || []
   if (~this.states.indexOf(state)) return
   if (this.findState(state)) throw new Error('State names must be unique!')
@@ -74,12 +70,12 @@ Workflow.prototype.add = function(state) {
   this.emit('add', state)
 }
 
-Workflow.prototype._leave = function() {
+State.prototype._leave = function() {
   if (!this.state) return
   this.emit('leave', this.state)
 }
 
-Workflow.prototype._enter = function(state, args) {
+State.prototype._enter = function(state, args) {
   this.emit.apply(this, ['enter', state].concat(args))
 }
 
@@ -92,7 +88,7 @@ Workflow.prototype._enter = function(state, args) {
  * @param State state
  * @api private
  */
-Workflow.prototype._splitByName = function splitByName(type, state) {
+State.prototype._splitByName = function splitByName(type, state) {
   var args = [].slice.call(arguments, 2)
   if (!args.length) args = ''
   var message = [type + ' ' + state.name].concat(args)
@@ -100,6 +96,15 @@ Workflow.prototype._splitByName = function splitByName(type, state) {
   this.emit.apply(this, message)
 }
 
+/**
+ * Returns true iff `obj` is an Object (and not an Array/Date/???).
+ *
+ * @return {Boolean}
+ * @api private
+ */
+
+function isObject(obj) {
+  return '[object Object]' === Function.prototype.call.call(Object.prototype.toString, obj)
+}
 
 module.exports.State = State
-module.exports.Workflow = Workflow

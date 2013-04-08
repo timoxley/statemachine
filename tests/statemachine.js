@@ -2,7 +2,7 @@
 
 var StateMachine = require('statemachine')
 var State = require('statemachine').State
-var Workflow = require('statemachine').Workflow
+var Workflow = State
 var assert = require('timoxley-assert')
 var delegate = require('component-delegate')
 
