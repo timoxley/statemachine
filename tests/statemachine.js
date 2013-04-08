@@ -47,8 +47,6 @@ describe("Workflows", function() {
     assert(document.body.classList.contains(LoginState.name))
   })
 
-
-
   info("We should always reverse our changes when we leave a state.", function() {
     app.on('leave', function(oldState) {
       // undo everything done in the .on('enter')
@@ -79,7 +77,6 @@ describe('Actions', function() {
     LoginState.forgotPassword = function() {}
     LoginState.authenticate = function(username, password) {}
   })
-
 
   info("Actions may perform calculations, then decide which state to go to next.", function() {
     LoginState.forgotPassword = function() {
