@@ -107,4 +107,4 @@ function isObject(obj) {
   return '[object Object]' === Function.prototype.call.call(Object.prototype.toString, obj)
 }
 
-module.exports.State = State
+module.exports = State

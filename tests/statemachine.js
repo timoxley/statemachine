@@ -1,7 +1,7 @@
 "use strict"
 
 var StateMachine = require('statemachine')
-var State = require('statemachine').State
+var State = require('statemachine')
 var Workflow = State
 var assert = require('timoxley-assert')
 var delegate = require('component-delegate')
